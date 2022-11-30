@@ -7,6 +7,12 @@ dotenv.config()
 // Express app
 const app = express()
 
+// Middleware to log all requests
+app.use((req, res, next) => {
+    console.log(req.path, req.method)
+    next()
+})
+
 // Routes
 app.get('/', (req, res) => {
     res.json({message: "Welcome to the app"})
