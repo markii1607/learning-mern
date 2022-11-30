@@ -8,7 +8,10 @@ dotenv.config()
 
 // Connect to Mongo DB
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("Connected to db"))
+    .then(() => {
+        // Listener
+        app.listen(process.env.PORT, () => console.log(`Connected to db & Listening on port ${process.env.PORT}`))
+    })
     .catch((err) => console.log(err))
 
 // Express app
@@ -24,6 +27,3 @@ app.use((req, res, next) => {
 
 // Routes for APIs
 app.use('/api/workouts', workoutRoutes)
-
-// Listener
-app.listen(process.env.PORT, () => console.log("Listening to port 3333"))
